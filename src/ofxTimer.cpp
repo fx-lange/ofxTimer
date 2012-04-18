@@ -24,7 +24,7 @@ ofxTimer::ofxTimer() {
 }
 
 ofxTimer::~ofxTimer() {
-	ofRemoveListener(ofEvents.update, this, &ofxTimer::update);
+	ofRemoveListener(ofEvents().update, this, &ofxTimer::update);
 	printf("*** Timer Destroyed ***\n");
 }
 
@@ -44,7 +44,7 @@ void ofxTimer::setup(float millSeconds, bool loopTimer) {
 	timerStart	= 0;
 	
 	//events
-	ofAddListener(ofEvents.update, this, &ofxTimer::update);
+	ofAddListener(ofEvents().update, this, &ofxTimer::update);
 	
 }
 
