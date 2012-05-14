@@ -20,7 +20,6 @@
 #include "ofxTimer.h"
 
 ofxTimer::ofxTimer() {
-	
 }
 
 ofxTimer::~ofxTimer() {
@@ -42,11 +41,29 @@ void ofxTimer::setup(float millSeconds, bool loopTimer) {
 	setupDelay	= delay;
 	timer		= 0;
 	timerStart	= 0;
+
+    paused = false;
+    resumed = false;
 	
 	//events
 	ofAddListener(ofEvents().update, this, &ofxTimer::update);
 	
 }
+
+// ---------------------------------------
+void ofxTimer::pauseTimer() {
+    paused = true;
+    pauseStartTime = ofGetElapsedTimef();
+}
+
+// ---------------------------------------
+void ofxTimer::resumeTimer() {
+    resumed = true;
+    paused = false;
+    pauseTime = ofGetElapsedTimef() - pauseStartTime;
+}
+
+
 
 // ---------------------------------------
 void ofxTimer::reset() {
@@ -65,13 +82,22 @@ void ofxTimer::loop(bool b) {
 
 // ---------------------------------------
 void ofxTimer::update(ofEventArgs &e) {
-	if(!bPauseTimer) {
+
+    if (paused) 
+        return;
+
+    if(!bPauseTimer) {
 		if(bStartTimer) {
 			bStartTimer = false;
 			timerStart  = ofGetElapsedTimef();
 		}
 		
 		float time = ofGetElapsedTimef() - timerStart;
+
+        if (resumed) {
+            time -= pauseTime;
+        }
+
 		time *= 1000.0;		
 		if(time >= delay) {
 			count ++;
@@ -79,6 +105,9 @@ void ofxTimer::update(ofEventArgs &e) {
 				bPauseTimer = true;
 				bTimerFinished = true;//TODO noch kein unterschied zu bPaused;
 			}
+            paused = false;
+            resumed = false;
+
 			bStartTimer = true;
 			static ofEventArgs timerEventArgs;
 			ofNotifyEvent(TIMER_REACHED, timerEventArgs, this);

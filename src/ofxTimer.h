@@ -33,6 +33,11 @@ private:
 	float		delay, setupDelay;
 	float		timer;
 	float		timerStart;
+    // Modifs
+    float       pauseStartTime;
+    float       pauseTime;
+    bool        paused;
+    bool        resumed;
 
 	void update(ofEventArgs &e);
 	
@@ -53,6 +58,8 @@ public:
 	void setTimer(float millSeconds);
 	void startTimer();
 	void stopTimer();
+    void pauseTimer();
+    void resumeTimer();
 	void loop(bool b);
 	bool isTimerFinished();
 };
