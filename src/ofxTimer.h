@@ -56,6 +56,8 @@ public:
 	
 	// ---------------------------------------
 	void setTimer(float millSeconds);
+    float getTimeLeftInSeconds();
+    float getTimeLeftInMillis();
 	void startTimer();
 	void stopTimer();
     void pauseTimer();

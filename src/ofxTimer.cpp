@@ -115,6 +115,34 @@ void ofxTimer::update(ofEventArgs &e) {
 	}
 }
 
+float ofxTimer::getTimeLeftInSeconds() {
+    float time = ofGetElapsedTimef() - timerStart;
+
+    if (resumed) {
+        time = (ofGetElapsedTimef() - timerStart - pauseTime);
+    }
+
+    if (paused) {
+        time = (ofGetElapsedTimef() - timerStart - ofGetElapsedTimef() + pauseStartTime);
+    }
+
+    return (delay/1000.0)-time;
+}
+
+float ofxTimer::getTimeLeftInMillis() {
+    float time = ofGetElapsedTimef() - timerStart;
+
+    if (resumed) {
+        time = (ofGetElapsedTimef() - timerStart - pauseTime);
+    }
+
+    if (paused) {
+        time = (ofGetElapsedTimef() - timerStart - ofGetElapsedTimef() + pauseStartTime);
+    }
+
+    return delay-(time*1000.0);
+}
+
 // ---------------------------------------
 void ofxTimer::setTimer(float millSeconds) {
 	delay = millSeconds;
