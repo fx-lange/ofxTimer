@@ -73,6 +73,8 @@ void ofxTimer::reset() {
 //	delay = setupDelay;
 	bStartTimer = true;
 	bTimerFinished = false;
+    resumed = false;
+    paused = false;
 }
 
 // ---------------------------------------
