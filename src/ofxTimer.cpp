@@ -115,8 +115,8 @@ void ofxTimer::update(ofEventArgs &e) {
 
 float ofxTimer::getTimeLeftInSeconds() {
 
-	if (bPauseTimer)
-		return delay * 1000.0;
+	if (bTimerFinished)
+		return 0;
 
 	float time = ofGetElapsedTimef() - timerStart;
 
@@ -134,8 +134,8 @@ float ofxTimer::getTimeLeftInSeconds() {
 
 float ofxTimer::getTimeLeftInMillis() {
 
-	if (bPauseTimer)
-		return delay;
+	if (bTimerFinished)
+		return 0;
 
 	float time = ofGetElapsedTimef() - timerStart;
 
