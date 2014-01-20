@@ -30,7 +30,7 @@ private:
 	bool		bPauseTimer;
 	bool		bStartTimer;
 	bool		bTimerFinished;
-	float		delay, setupDelay;
+	float		delay;
 	float		timer;
 	float		timerStart;
     // Modifs
