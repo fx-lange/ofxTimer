@@ -118,6 +118,10 @@ float ofxTimer::getTimeLeftInSeconds() {
 	if (bTimerFinished)
 		return 0;
 
+	if (bStartTimer) {
+		return delay / 1000.f;
+	}
+
 	float time = ofGetElapsedTimef() - timerStart;
 
 	if (resumed) {
@@ -136,6 +140,10 @@ float ofxTimer::getTimeLeftInMillis() {
 
 	if (bTimerFinished)
 		return 0;
+
+	if (bStartTimer) {
+		return delay;
+	}
 
 	float time = ofGetElapsedTimef() - timerStart;
 
