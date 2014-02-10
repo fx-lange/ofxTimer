@@ -37,6 +37,7 @@ void ofxTimer::setup(float millSeconds, bool loopTimer) {
 
 	//timer
 	bStartTimer = true;
+	bTimerFinished = false;
 	delay = millSeconds;	// mill seconds
 	timer = 0;
 	timerStart = 0;
